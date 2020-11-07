@@ -1,0 +1,97 @@
+//program to create a game of snake, water and gun 
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+int snakeWaterGun(char you, char computer)
+{  
+    // if the function returns 1 you win, -1 you lose and 0 match draw 
+    // This below statement represents the condition of match draw
+    // in this condition, Match will be draw when these cases occured 
+	// ss
+	// ww
+	// gg
+	// where 's' stands for Snake, 'w' stands for Water and 'g' stands for Gun  
+	    
+	if( you == computer )
+	{
+		return 0;
+	}
+	
+	// These cases are of non - draw conditions
+   	// following case may be occur during the game
+    // sw
+    // ws
+    // wg
+    // gw 
+    // gs
+    // sg
+    
+	if( you == 's' && computer == 'w')
+	{
+		return 1;
+	}
+	else if( you == 'w' && computer == 's')
+	{
+		return -1;
+	}
+	
+	if( you == 'w' && computer == 'g')
+	{
+		return 1;
+	}
+	else if( you == 'g' && computer == 'w')
+	{
+		return -1;
+	}
+	
+	if( you == 'g' && computer == 's')
+	{
+		return 1;
+	}
+	else if( you == 's' && computer == 'g')
+	{
+		return -1;
+	}
+}
+
+int main()
+{
+	char you, computer;
+	srand(time(0));
+	int number = rand()%100 + 1;
+	
+	if(number<33)
+	{
+		computer = 's';
+	}
+	else if(number>33 && number<66)
+	{
+		computer = 'w';
+	}
+	else 
+	{
+		computer = 'g';
+	}
+	
+	printf("Enter 's' for snake, 'w' for water and 'g' for gun : ");
+	scanf("%c",&you);
+	
+	int result = snakeWaterGun(you, computer);
+	
+	if( result == 0)
+	{
+		printf("Match Draw!\n");
+	}
+	else if( result == 1)
+	{
+		printf("You won!\n");
+	}
+	else 
+	{
+		printf("You Lose!\n");
+	}
+	
+	printf("You choose %c and computer choose %c.",you, computer);
+	return 0;
+}
